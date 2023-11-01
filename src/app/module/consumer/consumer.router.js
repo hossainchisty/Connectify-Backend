@@ -4,7 +4,7 @@ const { consumerList, createConsumer, modifyConsumer, deleteConsumer } = require
 
 router.get('/', consumerList);
 router.post('/', createConsumer);
-router.put('/:id', modifyConsumer);
+router.patch('/:id', modifyConsumer);
 router.delete('/:id', deleteConsumer);
 
 module.exports = router;

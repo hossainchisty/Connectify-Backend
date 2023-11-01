@@ -53,7 +53,10 @@ exports.createConsumer = asyncHandler(async (req, res) => {
       consumer,
     );
   } catch (error) {
-    next(error);
+    res.status(status.INTERNAL_SERVER_ERROR).json({
+      statusCode: status.INTERNAL_SERVER_ERROR,
+      message: error.message,
+    });
   }
 });
 
@@ -64,7 +67,7 @@ exports.createConsumer = asyncHandler(async (req, res) => {
  * @access  Private
  */
 
-exports.modifyConsumer = asyncHandler(async (req, res, next) => {
+exports.modifyConsumer = asyncHandler(async (req, res) => {
   const { name, description } = req.body;
 
   try {
@@ -87,7 +90,10 @@ exports.modifyConsumer = asyncHandler(async (req, res, next) => {
       updateConsumer,
     );
   } catch (error) {
-    next(error);
+    res.status(status.INTERNAL_SERVER_ERROR).json({
+      statusCode: status.INTERNAL_SERVER_ERROR,
+      message: error.message,
+    });
   }
 });
 
@@ -101,7 +107,6 @@ exports.modifyConsumer = asyncHandler(async (req, res, next) => {
 exports.deleteConsumer = asyncHandler(async (req, res) => {
   try {
     const consumer = await consumerService.getConsumerByID(req.params.id);
-
     if (!consumer) {
       sendResponse(res, status.NOT_FOUND, true, 'consumer not found');
     }
@@ -114,6 +119,9 @@ exports.deleteConsumer = asyncHandler(async (req, res) => {
       deletedconsumer,
     );
   } catch (error) {
-    next(error);
+    res.status(status.INTERNAL_SERVER_ERROR).json({
+      statusCode: status.INTERNAL_SERVER_ERROR,
+      message: error.message,
+    });
   }
 });

@@ -79,7 +79,7 @@ exports.deleteConsumer = async consumerId => {
 };
 
 /**
- * Retrieves a consumer by its ID and increments its read count.
+ * Retrieves a consumer by its ID.
  *
  * @param {string} consumerId - The unique identifier of the consumer.
  * @returns {Object} Retrieved consumer details.
