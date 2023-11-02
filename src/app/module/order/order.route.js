@@ -1,16 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const { orderLists, submitOrder, updateOrder, getOrderStatus, getShippingOptions } = require('./order.controller');
 
-const orderController = require('./order.controller');
-
-const { authMiddleware } = require('../../middleware/authMiddleware');
-
-// Routing Implement
-router.get('/', authMiddleware, orderController.orderLists);
-router.patch(
-  '/:orderId/update-status',
-  authMiddleware,
-  orderController.updateOrderStatus,
-);
+router.get('/',  orderLists);
+router.post('/order',  submitOrder);
+router.put('/order/:id',  updateOrder);
+router.get('/order/:id/status',  getOrderStatus);
+router.get('/order/:id/shipping',  getShippingOptions);
 
 module.exports = router;

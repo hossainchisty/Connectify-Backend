@@ -1,6 +1,52 @@
 const Order = require('./order.model');
 const { sendResponse } = require('../../../utils/sendResponse');
 
+
+/**
+ * @desc    Get order lists of customers
+ * @route   /api/v1/order/
+ * @method  GET
+ * @access  Private
+ */
+
+exports.submitOrder = async (req, res) => {
+  
+};
+
+/**
+ * @desc    Get order lists of customers
+ * @route   /api/v1/order/
+ * @method  GET
+ * @access  Private
+ */
+
+exports.updateOrder = async (req, res) => {
+  
+};
+
+/**
+ * @desc    Get order lists of customers
+ * @route   /api/v1/order/
+ * @method  GET
+ * @access  Private
+ */
+
+exports.getOrderStatus = async (req, res) => {
+  
+};
+
+/**
+ * @desc    Get order lists of customers
+ * @route   /api/v1/order/
+ * @method  GET
+ * @access  Private
+ */
+
+exports.getShippingOptions = async (req, res) => {
+  
+};
+
+
 /**
  * @desc    Get order lists of customers
  * @route   /api/v1/order/

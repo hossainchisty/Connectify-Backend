@@ -1,47 +1,27 @@
 const mongoose = require('mongoose');
-
-// Custom ID generation function
-function generateId() {
-  const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let customId = '';
-  for (let i = 0; i < 8; i++) {
-    customId += characters.charAt(
-      Math.floor(Math.random() * characters.length),
-    );
-  }
-  return customId;
-}
+const { generateId } = require('../../../utils/generateId');
 
 // Order Schema Definition
 
-const orderItemSchema = new mongoose.Schema({
-  bookId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Book',
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    required: true,
-  },
-});
-
 const orderSchema = mongoose.Schema(
   {
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: false,
+      ref: 'Product',
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: false,
       ref: 'User',
     },
-    items: [orderItemSchema],
-    totalPrice: {
-      type: Number,
-      required: true,
-    },
-    address: {
+    address1: {
       type: String,
       required: true,
+    },
+    address2: {
+      type: String,
+      required: false,
     },
     city: {
       type: String,
@@ -51,10 +31,18 @@ const orderSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    state: {
+      type: String,
+      required: true,
+    },
+    cardName: {
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
-      enum: ['Pending', 'Processing', 'Shipped', 'Delivered'],
-      default: 'Pending',
+      enum: ['processing', 'completed', 'cancelled'],
+      default: 'Processing',
     },
     isPaid: {
       type: Boolean,
@@ -64,41 +52,9 @@ const orderSchema = mongoose.Schema(
       type: String,
       default: 'Card',
     },
-    trackingNumber: {
-      type: String,
-      unique: true,
-      default: () => `LLTN-${generateId()}`,
-      indexed: true,
-    },
-    transactionId: {
-      type: String,
-      unique: true,
-      default: () => generateId(),
-      indexed: true,
-    },
-    delivereAt: {
-      type: Date,
-      required: false,
-    },
   },
   { timestamps: true, versionKey: false },
 );
-
-// Middleware to generate custom transactionId
-orderSchema.pre('save', function (next) {
-  if (!this.transactionId) {
-    this.transactionId = generateId();
-  }
-  next();
-});
-
-// Middleware to generate custom trackingNumber
-orderSchema.pre('save', function (next) {
-  if (!this.trackingNumber) {
-    this.trackingNumber = `LLTN-${generateId()}`;
-  }
-  next();
-});
 
 const Order = mongoose.model('Order', orderSchema);
 module.exports = Order;
