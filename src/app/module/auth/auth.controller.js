@@ -91,7 +91,6 @@ const registerUser = async (req, res, next) => {
       // Send verification email
       const domain = config.FRONTEND_URL;
       const verificationLink = `${domain}/verify-email/${createdUser.verificationToken}`;
-      console.log(verificationLink);
       sendVerificationEmail(createdUser.email, verificationLink);
 
       res.status(201).json({
