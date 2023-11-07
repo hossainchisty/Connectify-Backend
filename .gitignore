@@ -27,3 +27,4 @@ uploads/
 .vercel
 TODO.MD
 .vscode
+src/logs/access.log
