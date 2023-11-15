@@ -45,16 +45,8 @@ const userSchema = mongoose.Schema(
     role: {
       type: String,
     },
-    hasEarnedBadge: { type: Boolean, default: false },
-    wishlist: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Book',
-      },
-    ],
   },
   { timestamps: true, versionKey: false },
 );
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+module.exports = mongoose.model('User', userSchema);
