@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { generateId } = require('../../../utils/generateId');
 
 // Order Schema Definition
 
@@ -56,5 +55,4 @@ const orderSchema = mongoose.Schema(
   { timestamps: true, versionKey: false },
 );
 
-const Order = mongoose.model('Order', orderSchema);
-module.exports = Order;
+module.exports = mongoose.model('Order', orderSchema);
